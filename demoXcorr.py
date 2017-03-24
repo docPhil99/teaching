@@ -21,6 +21,27 @@ def xcorr(image):
     cv2.putText(image,"xcorr Max val {:.2f}".format(max_val),(10,20),cv2.FONT_HERSHEY_SIMPLEX,1,(1),2)
     cv2.imshow("Test",res)
 
+def xcorr2(image):
+    if target.size==0:
+        return
+    img=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
+    img=img.astype(np.float64)
+    laplacian = cv2.Laplacian(img,cv2.CV_64F)
+    img = cv2.convertScaleAbs(laplacian)
+    
+    targett=target.astype(np.float64)
+    laplaciant = cv2.Laplacian(targett,cv2.CV_64F)
+    targett = cv2.convertScaleAbs(laplaciant)
+    
+    
+    res=cv2.matchTemplate(img,targett,cv2.TM_CCOEFF_NORMED)
+    min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(res)
+    res=(res/max_val)
+    #resi=res.astype(np.uint8)
+    #cv2.putText(image,"xcorr",(10,20),cv2.FONT_HERSHEY_SIMPLEX,1,(255),2)
+    cv2.putText(image,"xcorr Max val {:.2f}".format(max_val),(10,20),cv2.FONT_HERSHEY_SIMPLEX,1,(1),2)
+    cv2.imshow("Test",res)
+
 
 def laplcian(image):
     img=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
@@ -32,8 +53,8 @@ def laplcian(image):
     cv2.imshow("Test",img)
 
 cap=cv2.VideoCapture(0)
-
-myFuncs=[grey,xcorr,laplcian]
+#sift = cv2.xfeatures2d.SIFT_create()
+myFuncs=[grey,xcorr,xcorr2]
 ind=0
 target=np.array([])
 while(True):
