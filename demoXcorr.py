@@ -6,6 +6,9 @@ import numpy as np
 
 def grey(image):
     img=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
+    img= cv2.rectangle(img,(280,200),(360,280),255,2)
+    #img= cv2.rectangle(img,(200,280),(280,360),255,2)
+
     cv2.putText(img,"grey scale",(10,20),cv2.FONT_HERSHEY_SIMPLEX,1,(255),2)
     cv2.imshow("Test",img)
     
@@ -51,6 +54,9 @@ def laplcian(image):
     img = cv2.convertScaleAbs(laplacian)
     cv2.putText(img,"Laplacian",(10,20),cv2.FONT_HERSHEY_SIMPLEX,1,(255),2)
     cv2.imshow("Test",img)
+
+print('Align target with square, press g to grab. n cycles through greyscale,')
+print('xcorrelation, x-correlation with laplacian filter')
 
 cap=cv2.VideoCapture(0)
 #sift = cv2.xfeatures2d.SIFT_create()
