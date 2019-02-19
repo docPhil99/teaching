@@ -58,7 +58,7 @@ def sobelxy(image):
     cv2.imshow("Test",img)
 
 def face(img):
-    rects = cascade.detectMultiScale(img, 1.3, 4, cv2.CV_HAAR_SCALE_IMAGE, (20,20))
+    rects = cascade.detectMultiScale(img, 1.3, 5)
     if len(rects) > 0:
         rects[:, 2:] += rects[:, :2]
     for x1, y1, x2, y2 in rects:
